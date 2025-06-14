@@ -1,0 +1,106 @@
+// BETA BETA BETA
+// Script parsed by PanoplyCL to create a plot. Usage:
+// java -jar PanoplyCL.jar plot.pcl
+
+// Note: This script was exported by Panoply 5.6.0.
+// Many plot option keys are not compatible with Panoply 4.
+// A few may not be compatible with prior Panoply 5 releases.
+
+// Open a dataset.
+var ncfile1 = panoply.openDataset ( "file:/C:/Users/joely/Downloads/rain.nc" );
+
+// Select a variable.
+var ncvar1 = ncfile1.getVariable ( "GLDAS_NOAH025_3H_2_1_Rainf_tavg" );
+
+// Create the plot.
+var myplot = panoply.createPlot ( "lonlat", ncvar1 );
+
+// Open dataset containing second var in combination plot.
+var ncfile2 = panoply.openDataset ( "file:/C:/Users/joely/Downloads/cloud.nc" );
+
+// Select second variable.
+var ncvar2 = ncfile2.getVariable ( "MYD08_D3_6_1_Cloud_Fraction_Mean" );
+
+// Add second var to plot in second slot.
+myplot.setVariable ( 2, ncvar2 );
+
+// Combination of vars is 'Array 1 / Array 2'
+myplot.set ( "combination", "A1_OVER_A2" );
+
+
+// Specify plot settings.
+myplot.set ( "size-factor", 140 );
+myplot.set ( "size-width", 100 );
+myplot.set ( "size-height", 50 );
+
+myplot.set ( "color-background", "white" );
+myplot.set ( "border-weight", 150 );
+
+myplot.set ( "include-title", true );
+myplot.set ( "include-footnotes", true );
+myplot.set ( "include-margins", true );
+
+myplot.set ( "labels-font", "Times New Roman" );
+myplot.set ( "labels-super10", true );
+
+myplot.set ( "title-text", "Rainbow Probabilities" );
+myplot.set ( "title-size", 16.0 );
+myplot.set ( "subtitle-text", "Rain precipitation rate / Cloud Fraction" );
+myplot.set ( "subtitle-size", 12.0 );
+
+myplot.set ( "interpolate", true );
+myplot.set ( "scale-method", "scalar" );
+myplot.set ( "scale-units", "kg.m-2.s-1" );
+myplot.set ( "scale-min", 0.0 );
+myplot.set ( "scale-max", 1.5762171824462712E-4 );
+myplot.set ( "scale-div-major", 4 );
+myplot.set ( "scale-div-minor", 2 );
+myplot.set ( "scale-tick-size", 11.0 );
+myplot.set ( "scale-tick-format", "%.8G" );
+myplot.set ( "scale-label-custom", true );
+myplot.set ( "scale-label-text", "" );
+myplot.set ( "scale-label-size", 14.0 );
+
+myplot.set ( "include-colorbar", true );
+myplot.set ( "colorbar-name", "panoply.act" );
+myplot.set ( "colorbar-invalids", "rgb(191,191,191)" );
+myplot.set ( "colorbar-reverse", false );
+myplot.set ( "colorbar-location", "below" );
+myplot.set ( "colorbar-length", 60 );
+myplot.set ( "colorbar-border-weight", 100 );
+myplot.set ( "colorbar-tick-length", "short" );
+myplot.set ( "colorbar-outlier-side", "both" );
+myplot.set ( "colorbar-outlier-shape", "triangle" );
+myplot.set ( "colorbar-outlier-gap", "thin" );
+myplot.set ( "colorbar-label-location", "above" );
+
+myplot.set ( "proj-name", "Equirectangular" );
+myplot.set ( "proj-lon0", 0.0 );
+myplot.set ( "proj-xparam-1", 0.0 );
+
+myplot.set ( "proj-shading-vis", false );
+
+myplot.set ( "overlay-1-weight", 75 );
+myplot.set ( "overlay-1-name", "Earth.cno" );
+myplot.set ( "overlay-1-color", "black" );
+myplot.set ( "overlay-2-weight", 0 );
+myplot.set ( "overlay-3-weight", 0 );
+
+myplot.set ( "grid-weight", 50 );
+myplot.set ( "grid-style", "solid" );
+myplot.set ( "grid-color", "black" );
+myplot.set ( "grid-spacing-lon", 15.0 );
+myplot.set ( "grid-spacing-lat", 15.0 );
+myplot.set ( "grid-offset-lat", false );
+myplot.set ( "grid-lon-pruned", false );
+myplot.set ( "grid-label-step", 0 );
+myplot.set ( "grid-label-size", 6.5 );
+
+myplot.set ( "contour-weight", 0 );
+
+myplot.set ( "footnote-size", 8.0 );
+myplot.set ( "footnote-minmax-vis", true );
+myplot.set ( "footnote-minmax-format", "Same" );
+
+// Save plot image to disk.
+myplot.saveImage ( "PNG", "GLDAS_NOAH025_3H_2_1_Rainf_t_in_rain.png" );
